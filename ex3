@@ -1,0 +1,91 @@
+import java.util.ArrayList;
+import java.util.List;
+
+class Televisao {
+    private boolean ligada;
+    private int volume;
+    private int CanalNow;
+    private final int VolumeMin = 0;
+    private final int VolumeMax = 100;
+    private List<String> canais;
+
+    public Televisao() {
+        ligada = false;
+        volume = 0;
+        CanalNow = 0;
+        canais = new ArrayList<>();
+        canais.add("Canal 1");
+        canais.add("Canal 2");
+        canais.add("Canal 3");
+        canais.add("Canal 4");
+        canais.add("Canal 5");
+    }
+
+    public void aumentarVolume() {
+        if (ligada && volume < VolumeMax) {
+            volume++;
+            System.out.println("Volume aumentado: " + volume);
+        }
+    }
+
+    public void diminuirVolume() {
+        if (ligada && volume > VolumeMin) {
+            volume--;
+            System.out.println("Volume diminuido: " + volume);
+        }
+    }
+
+    public void subirCanal() {
+        if (ligada) {
+            if (CanalNow == canais.size() - 1) {
+                CanalNow = 0;
+            } else {
+                CanalNow++;
+            }
+            System.out.println("Canal atual: " + canais.get(CanalNow));
+        }
+    }
+
+    public void descerCanal() {
+        if (ligada) {
+            if (CanalNow == 0) {
+                CanalNow = canais.size() - 1;
+            } else {
+                CanalNow--;
+            }
+            System.out.println("Canal atual: " + canais.get(CanalNow));
+        }
+    }
+
+    public void ligar() {
+        ligada = true;
+        System.out.println("Televisao ligada");
+    }
+
+    public void desligar() {
+        ligada = false;
+        System.out.println("Televisao desligada");
+    }
+
+    public void exibirInformacoes() {
+        System.out.println("Estado: " + (ligada ? "Ligada" : "Desligada"));
+        System.out.println("Volume: " + volume);
+        System.out.println("Canal atual: " + canais.get(CanalNow));
+    }
+}
+
+public class Principal {
+    public static void main(String[] args) {
+        Televisao televisao = new Televisao();
+
+        televisao.ligar();
+        televisao.aumentarVolume();
+        televisao.subirCanal();
+        televisao.diminuirVolume();
+        televisao.descerCanal();
+
+        televisao.exibirInformacoes();
+
+        televisao.desligar();
+    }
+}
